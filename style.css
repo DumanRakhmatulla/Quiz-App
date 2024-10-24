@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(238, 232, 232);
+  display: flex;
+  /* text-align: center; */
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 1px rgba(100, 100, 100, 0.1);
+  width: 600px;
+  overflow: hidden;
+}
+
+.quiz-header {
+}
