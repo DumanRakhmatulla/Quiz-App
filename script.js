@@ -39,9 +39,7 @@ document.getElementById("startQuiz").addEventListener("click", function () {
     },
   ];
 
-  // Бастапқы экранды жасырып, викторина экранын көрсету
   document.getElementById("start-screen").style.display = "none";
-  // document.getElementById("container").style.display = "block";
   document.getElementById("quiz").style.display = "block";
 
   const questionElement = document.querySelector(".question");
@@ -51,14 +49,14 @@ document.getElementById("startQuiz").addEventListener("click", function () {
   const c_text = document.getElementById("c_text");
   const d_text = document.getElementById("d_text");
   const submitButton = document.getElementById("submit");
-  const timerElement = document.getElementById("timer");
   const quizContainer = document.getElementById("quiz");
 
   let currentQuestion = 0;
   let score = 0;
   let userAnswers = [];
-  let timeLeft = 5;
+  let timeLeft = 15;
   let timerId;
+  let blinkTimerId;
 
   function loadQuiz() {
     deselectAnswers();
@@ -71,8 +69,14 @@ document.getElementById("startQuiz").addEventListener("click", function () {
     c_text.innerText = currentQuizQuestion.options[2];
     d_text.innerText = currentQuizQuestion.options[3];
 
-    timeLeft = 5;
+    timeLeft = 15;
+    document.getElementById("time").innerText = timeLeft;
+
+    const timerElement = document.getElementById("timer");
+    timerElement.style.color = "rgba(0, 85, 170, 1)";
+
     clearInterval(timerId);
+    clearInterval(blinkTimerId);
     timerId = setInterval(updateTimer, 1000);
   }
 
@@ -151,9 +155,24 @@ document.getElementById("startQuiz").addEventListener("click", function () {
   function updateTimer() {
     timeLeft--;
 
-    if (timeLeft <= 0) {
+    const timerElement = document.getElementById("timer");
+    timerElement.innerHTML = `Time left: ${timeLeft} seconds`;
+
+    if (timeLeft <= 5 && timeLeft > 0) {
+      clearInterval(blinkTimerId);
+      blinkTimerId = setInterval(() => {
+        if (timerElement.style.color === "red") {
+          timerElement.style.color = "rgba(0, 85, 170, 1)";
+        } else {
+          timerElement.style.color = "red";
+        }
+      }, 500);
+    } else if (timeLeft <= 0) {
       clearInterval(timerId);
-      alert("Your time is up! Move on to the next question");
+      clearInterval(blinkTimerId);
+      timerElement.style.color = "red";
+    } else {
+      timerElement.style.color = "rgba(0, 85, 170, 1)";
     }
   }
 
