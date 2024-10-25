@@ -51,6 +51,8 @@ document.getElementById("startQuiz").addEventListener("click", function () {
   const submitButton = document.getElementById("submit");
   const quizContainer = document.getElementById("quiz");
 
+  submitButton.style.backgroundColor = "rgba(0, 102, 204, 1)";
+
   let currentQuestion = 0;
   let score = 0;
   let userAnswers = [];
@@ -74,10 +76,17 @@ document.getElementById("startQuiz").addEventListener("click", function () {
 
     const timerElement = document.getElementById("timer");
     timerElement.style.color = "rgba(0, 85, 170, 1)";
+    resetBorders();
 
     clearInterval(timerId);
     clearInterval(blinkTimerId);
     timerId = setInterval(updateTimer, 1000);
+  }
+
+  function resetBorders() {
+    document.querySelectorAll("label").forEach((label) => {
+      label.style.borderColor = "rgba(0, 85, 170, 0.6)";
+    });
   }
 
   function getSelected() {
@@ -182,9 +191,8 @@ document.getElementById("startQuiz").addEventListener("click", function () {
     if (answer) {
       const answerIndex = ["a", "b", "c", "d"].indexOf(answer);
       userAnswers.push(answerIndex);
-      if (answerIndex === quizQuestions[currentQuestion].correctAnswer) {
-        score++;
-      }
+      submitButton.style.backgroundColor = "rgba(0, 102, 204, 1)";
+      resetBorders();
 
       currentQuestion++;
 
@@ -196,8 +204,14 @@ document.getElementById("startQuiz").addEventListener("click", function () {
 
       submitButton.blur();
     } else {
-      alert("Please select an answer!");
-      submitButton.blur();
+      submitButton.style.backgroundColor = "red";
+      document.querySelectorAll("label").forEach((label) => {
+        label.style.borderColor = "red";
+      });
+      setTimeout(() => {
+        submitButton.style.backgroundColor = "rgba(0, 102, 204, 1)";
+        resetBorders();
+      }, 1000);
     }
   }
 
