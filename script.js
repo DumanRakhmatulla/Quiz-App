@@ -1,31 +1,44 @@
 document.getElementById("startQuiz").addEventListener("click", function () {
   const quizQuestions = [
     {
-      question: "What is the capital of France?",
-      options: ["Berlin", "Madrid", "Paris", "Rome"],
+      question: "In which year was Cristiano Ronaldo born?",
+      options: ["1985", "1987", "1990", "1983"],
+      correctAnswer: 0,
+    },
+    {
+      question:
+        "What was Cristiano Ronaldo's first professional football club?",
+      options: [
+        "Real Madrid",
+        "Sporting Lisbon",
+        "Manchester United",
+        "Juventus",
+      ],
+      correctAnswer: 1,
+    },
+    {
+      question: "How many times has Ronaldo won the Ballon d'Or?",
+      options: ["3", "4", "5", "6"],
       correctAnswer: 2,
     },
     {
-      question: "Which planet is known as the Red Planet?",
-      options: ["Earth", "Mars", "Jupiter", "Venus"],
+      question:
+        "Which major tournament did Ronaldo win with the Portugal national team?",
+      options: [
+        "World Cup",
+        "European Championship",
+        "Confederations Cup",
+        "Africa Cup of Nations",
+      ],
       correctAnswer: 1,
     },
     {
-      question: "What is the capital of France?",
-      options: ["Berlin", "Madrid", "Paris", "Rome"],
-      correctAnswer: 2,
-    },
-    {
-      question: "Which planet is known as the Red Planet?",
-      options: ["Earth", "Mars", "Jupiter", "Venus"],
-      correctAnswer: 1,
-    },
-    {
-      question: "Which planet is known as the Red Planet?",
-      options: ["Earth", "Mars", "Jupiter", "Venus"],
-      correctAnswer: 1,
+      question: "With which club did Ronaldo win the 2016 Champions League?",
+      options: ["Juventus", "Manchester United", "Barcelona", "Real Madrid"],
+      correctAnswer: 3,
     },
   ];
+
   // Бастапқы экранды жасырып, викторина экранын көрсету
   document.getElementById("start-screen").style.display = "none";
   // document.getElementById("container").style.display = "block";
@@ -83,8 +96,9 @@ document.getElementById("startQuiz").addEventListener("click", function () {
 
   function showResults() {
     clearInterval(timerId);
+
     quizContainer.innerHTML = `
-        <div class="recycling container">
+        <div class="recycling">
             <h2>
             You've completed the Quiz </br>
             You got only ${score} out of ${quizQuestions.length}</h2>
